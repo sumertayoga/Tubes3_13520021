@@ -1,0 +1,23 @@
+{
+  "name": "tubes3_13520021",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sumertayoga/Tubes3_13520021.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sumertayoga/Tubes3_13520021/issues"
+  },
+  "homepage": "https://github.com/sumertayoga/Tubes3_13520021#readme",
+  "dependencies": {
+    "express": "^4.17.3"
+  }
+}
