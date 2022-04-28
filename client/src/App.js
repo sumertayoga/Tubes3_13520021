@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Axios from "axios";
 import './App.css';
+import Add from './feature/Add'
 
 function App() {
   const [search, setSearch] = useState('');
@@ -18,12 +19,15 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Pencarian Riwayat</h1>
+      <header>
+        <Add />
+      </header>
+      {/* <h1>Pencarian Riwayat</h1>
       <input type="text"  
       onChange={(event) => {
         setSearch(event.target.value);
       }}/>
-      <button onClick={getRiwayat} >cari</button>
+      <button onClick={getRiwayat} >cari</button> */}
     </div>
   );
 }
