@@ -11,7 +11,7 @@ app.use(cors());
 app.use(express.json())
 
 app.get("/riwayat", (req, res) => {
-    db.query("SELECT * FROM riwayat", (err, result) => {
+    db.query("SELECT riwayat.id AS id_riwayat, tanggal, pengguna, nama, hasil FROM riwayat, dna_disease WHERE riwayat.id_penyakit = dna_disease.id", (err, result) => {
       if (err) {
         console.log(err);
       } else {
