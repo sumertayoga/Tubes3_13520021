@@ -1,24 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
+import { useState } from 'react';
+import Axios from "axios";
 import './App.css';
 
 function App() {
-  const [data, setData] = React.useState(null);
+  const [search, setSearch] = useState('');
+  const displaySearch = () => {
+    console.log(search);
+  }
 
-  React.useEffect(() => {
-    fetch("/api")
-      .then((res) => res.json())
-      .then((data) => setData(data.message));
-  }, []);
+  const [riwayatList, setRiwayatList] = useState([]);
+  const getRiwayat = () => {
+    Axios.get("http://localhost:3001/riwayat").then((response) => {
+      console.log(response.data);
+    });
+  };
+
 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          {!data ? "Loading..." : data}
-        </p>
-      </header>
+      <h1>Pencarian Riwayat</h1>
+      <input type="text"  
+      onChange={(event) => {
+        setSearch(event.target.value);
+      }}/>
+      <button onClick={getRiwayat} >cari</button>
     </div>
   );
 }
