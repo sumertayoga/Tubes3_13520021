@@ -4,6 +4,9 @@ const express = require("express");
 const cors = require('cors')
 const app = express();
 const db = require('./config/db')
+const multer = require("multer");
+const fs = require("fs");
+const { throws } = require("assert");
 
 const PORT = process.env.PORT || 3001;
 
@@ -79,3 +82,115 @@ console.log(err)
 app.listen(PORT, ()=>{
     console.log(`Server is running on ${PORT}`)
 })
+
+
+// SERVER FOR tesdna
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'public')
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + '-' + file.originalname)
+    }
+});
+
+function border(pattern){
+    const result = [];
+    result[0] = 0;
+
+    let pattern_length = pattern.length;
+    let i = 1; //suffix pointer
+    let j = 0; //prefix pointer
+
+    while(i < pattern_length-1){
+        if(pattern.charAt(j) == pattern.charAt(i)){
+            result[i] = j+1;
+            i++;
+            j++;
+        }
+        else if (j > 0){
+            j = result[j-1];
+        }
+        else{
+            result[i] = 0;
+            i++;
+        }
+    }
+    return result;
+}
+
+function kmpMatching(text, pattern){
+    let text_length = text.length;
+    let pattern_length = pattern.length;
+
+    let borderValue = border(pattern);
+
+    let i = 0; //text pointer
+    let j = 0; //pattern pointer
+
+    while(i < text_length){
+        if (pattern.charAt(j) == text.charAt(i)){
+            if(j == pattern_length-1){
+                return i - pattern_length + 1;
+            }
+            i++;
+            j++;
+        }
+        else if (j > 0){
+            j = borderValue[j-1];
+        }
+        else{
+            i++;
+        }
+    }
+    return -1;
+}
+
+
+
+const upload = multer({storage}).single('file');
+let fileName;
+let content;
+let namaPenyakit;
+let namaPengguna;
+let isTrue;
+let aaa;
+
+
+app.post('/upload', (req, res) => {
+    upload(req, res, (err) => {
+        if (err){
+            return res.status(500).json(err);
+        }
+        
+        fileName = req.file.filename;
+        namaPengguna = req.body.pengguna;
+        console.log(namaPengguna);
+        namaPenyakit = req.body.penyakit;
+        content = fs.readFileSync("./public/" + fileName).toString();
+
+        db.query("Insert into riwayat (id_penyakit, sequence_dna, tanggal, pengguna, hasil) values (123,'AAA','2012-01-01','AMIN RAIS',0)", (err, rows, fields) => {
+
+        })
+
+        
+        db.query("SELECT * FROM dna_disease WHERE nama = '" + namaPenyakit +"'" , (err, rows, fields) =>{
+            if (err) throw err
+          console.log(rows[0]);
+            if(kmpMatching(content, rows[0].sequence_dna) != -1){
+                isTrue = "TRUE";
+            }
+            else{
+                isTrue = "FALSE";
+            }
+            let result = {
+                nama: namaPengguna,
+                penyakit: namaPenyakit,
+                isTrue: isTrue
+            }
+            return res.status(200).send(result);
+        })
+
+
+    })
+});

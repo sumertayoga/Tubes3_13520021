@@ -4,6 +4,9 @@ import './App.css';
 import Add from './feature/Add'
 import axios from 'axios';
 import moment from 'moment';
+import { FindPenyakitPage } from './FindPenyakitPage';
+import Nav from './Nav';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 function App() {
   
@@ -32,9 +35,13 @@ function App() {
 
   return (
     <div className="App">
-      <header>
-        <Add />
-      </header>
+      <Router>
+        <Nav/>
+        <Switch>
+          <Route path='/add'  component={Add} />
+          <Route path='/tesdna'  component={FindPenyakitPage} />
+        </Switch>
+      </Router>
       <h1>Pencarian Riwayat</h1>
       <input type="text" placeholder='Search...'
           onChange={(e) => searchItems(e.target.value)}
