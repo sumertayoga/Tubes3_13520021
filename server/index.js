@@ -169,19 +169,13 @@ app.post('/upload', (req, res) => {
         namaPenyakit = req.body.penyakit;
         content = fs.readFileSync("./public/" + fileName).toString();
 
-        db.query("Insert into riwayat (id_penyakit, sequence_dna, tanggal, pengguna, hasil) values (123,'AAA','2012-01-01','AMIN RAIS',0)", (err, rows, fields) => {
-
-        })
 
         
         db.query("SELECT * FROM dna_disease WHERE nama = '" + namaPenyakit +"'" , (err, rows, fields) =>{
             if (rows[0] == undefined){
                 isTrue = "Not Found"
-                console.log("1 jalan");
             }
             else{
-                console.log("2 jalan");
-                console.log(rows[0]);
                 if(kmpMatching(content, rows[0].sequence_dna) != -1){
                     isTrue = "TRUE";
                 }
@@ -194,6 +188,19 @@ app.post('/upload', (req, res) => {
                 penyakit: namaPenyakit,
                 isTrue: isTrue
             }
+            let intHasil
+            if(isTrue == "TRUE"){
+                intHasil = 1
+            }
+            else{
+                intHasil = 0
+            }
+            const d = new Date()
+            let date = d.getFullYear().toString() + "-" + d.getMonth().toString() + "-" + d.getDate().toString();
+            db.query("Insert into riwayat (id_penyakit, sequence_dna, tanggal, pengguna, hasil) values (" + rows[0].id + "," + "'" + rows[0].sequence_dna+ "'" +"," + "'" + date+ "'" + "," + "'" + namaPengguna+ "'"+","+ intHasil.toString() +")", (err, rows, fields) => {
+
+            })
+
             return res.status(200).send(result);
         })
 
