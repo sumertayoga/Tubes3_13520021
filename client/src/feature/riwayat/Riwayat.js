@@ -53,7 +53,7 @@ export const Riwayat = () => {
                 <p className='item_tanggal'>{item.tanggal}</p>
                 <p className='item_pengguna'>{item.pengguna}</p>
                 <p className='item_penyakit'>{item.nama}</p>
-                <p className='item_hasil'>{item.hasil}</p>
+                <p className='item_hasil'>{item.hasil ? "TRUE" : "FALSE"}</p>
               </div>
             </div>
           )
