@@ -4,10 +4,10 @@
 Sebuah aplikasi yang berbasis Web yang dapat mendeteksi seseorang terkena penyakit apa dengan menggunakan algoritma Pattern Matching. Adapun algoritma yang digunakan ada dua, yaitu Boyer-Moore dan Knuth-Morris-Pratt.
 
 ## Requirement program
-Frontend : React
-Backend : Node js Express
-Database : MySQL
-Berikut beberapa modul yang harus ada di setiap bagian.
+Frontend : React  
+Backend : Node js Express  
+Database : MySQL  
+Berikut beberapa modul yang harus ada di setiap bagian.  
 FrontEnd:
 - axios 0.27.2
 - moment 2.29.3
