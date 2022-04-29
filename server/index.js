@@ -23,6 +23,10 @@ app.get("/riwayat", (req, res) => {
     });
   });
 
+app.listen(PORT, ()=>{
+    console.log(`Server is running on ${PORT}`)
+})
+
 // SERVER FOR tesdna
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -85,6 +89,49 @@ function kmpMatching(text, pattern){
     return -1;
 }
 
+function lastOccurence(pattern){
+    const result = [];
+    for (let i = 0; i < pattern.length; i++){
+        result[pattern.charAt(i)] = i;
+    }
+    return result;
+}
+
+function bmMatching(text, pattern){
+    const last = lastOccurence(pattern);
+    const text_length = text.length;
+    const pattern_length = pattern.length;
+    
+    let i = pattern_length - 1;
+    let j = pattern_length -1; //pattern pointer
+
+    if(pattern_length > text_length){
+        return -1;
+    }
+
+    do{
+        if(pattern.charAt(j) == text.charAt(i)){
+            if(j == 0){
+                return i;
+            }
+            else{
+                i--;
+                j--;
+            }
+        }
+        else{
+            let l = last[text.charAt(j)];
+            if(l == undefined){
+                l = -1;
+            }
+            i = i + pattern_length - Math.min(l+1, j);
+            j = pattern_length-1;
+        }
+    } while(i < text_length);
+
+    return -1;
+}
+
 
 
 const upload = multer({storage}).single('file');
@@ -105,9 +152,12 @@ app.post('/upload', (req, res) => {
         fileName = req.file.filename;
         namaPengguna = req.body.pengguna;
         namaPenyakit = req.body.penyakit;
+        algorithm = req.body.radio;
         content = fs.readFileSync("./public/" + fileName).toString();
 
         let regexCheck = content.match(/[ACTG]+/g)
+        console.log(regexCheck)
+        console.log("JALAN")
         if(regexCheck.length>1){
             let result = {
                 nama: namaPengguna,
@@ -122,12 +172,25 @@ app.post('/upload', (req, res) => {
                     isTrue = "Not Found"
                 }
                 else{
-                    if(kmpMatching(content, rows[0].sequence_dna) != -1){
+                    if(algorithm == "KMP"){
+                        if(kmpMatching(content, rows[0].sequence_dna) != -1){
+                            isTrue = "TRUE";
+                            console.log("KMP");
+                        }
+                        else{
+                            isTrue = "FALSE";
+                        }
+                    }
+                    else{
+                    if(bmMatching(content, rows[0].sequence_dna) != -1){
                         isTrue = "TRUE";
+                        console.log("BM")
                     }
                     else{
                         isTrue = "FALSE";
                     }
+                    }
+
                 }
                 let result = {
                     nama: namaPengguna,
@@ -153,7 +216,3 @@ app.post('/upload', (req, res) => {
 
     })
 });
-
-app.listen(PORT, ()=>{
-  console.log(`Server is running on ${PORT}`)
-})

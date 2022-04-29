@@ -8,6 +8,7 @@ export const FileUploader = () => {
     const [penyakit, setPenyakit] = useState(null);
     const [pengguna, setPengguna] = useState(null);
     const [hasil, setHasil] = useState(null);
+    const [radio, setRadio] = useState("KMP");
 
 
     const onFileChange = (e) => {
@@ -26,10 +27,12 @@ export const FileUploader = () => {
         e.preventDefault();
 
         const data = new FormData();
+        console.log(radio);
 
         data.append('file', file);
         data.append('penyakit', penyakit);
         data.append('pengguna', pengguna);
+        data.append('radio', radio);
 
         axios.post('//localhost:3001/upload', data)
             .then((res) => {
@@ -54,10 +57,24 @@ export const FileUploader = () => {
                 <label>Upload Your File </label>
                 <input type="file" accept=".txt"  onChange={onFileChange} class="form-control" multiple=""/>
               </div>
-              <input type="text" placeholder="Nama Pengguna"  onChange={onPenggunaChange} />
-              <input type="text" placeholder="Nama Penyakit"  onChange={onPenyakitChange} />
-              <button>Submit</button>
-        </form>
+                <div>
+                    <input type="text" placeholder="Nama Pengguna"  onChange={onPenggunaChange} />
+                    <input type="text" placeholder="Nama Penyakit"  onChange={onPenyakitChange} />
+                </div>
+                <div>
+                    <label>KMP</label>
+                    <input type='radio' checked={radio === "KMP"} onChange={() => {setRadio("KMP")}} />
+                </div>
+                <div>
+                    <label>BM</label>
+                    <input type='radio' checked={radio === "BM"} onChange={() => {setRadio("BM")}} />
+                </div>
+
+                <button>Submit</button>
+            </form>
+
+
+
         <FindPenyakit hasil={hasil}/>
         </div>
         
