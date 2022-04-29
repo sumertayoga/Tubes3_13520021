@@ -22,7 +22,7 @@ class Add extends Component {
     let dna = this.state.file
     let result = true;
     for (let index = 0; index < dna.length; index++) {
-      if (!(dna[index] == 'A' || dna[index] == 'G' || dna[index] == 'C' || dna[index] == 'T')) {
+      if (!(dna[index] === 'A' || dna[index] === 'G' || dna[index] === 'C' || dna[index] === 'T')) {
         result = false;
       }
     }
@@ -32,7 +32,7 @@ class Add extends Component {
   handleSubmit = event => {
     // Details of the uploaded file
     
-    if (this.isValid() == false) {
+    if (this.isValid() === false) {
       alert("Error : Input sequence dna tidak valid!")
     } else {
       let disease = this.state.disease;
@@ -78,10 +78,10 @@ class Add extends Component {
       }
       let text = ""
       let valid = ""
-      if (this.state.selectedFile.type == "text/plain") {
+      if (this.state.selectedFile.type === "text/plain") {
         text = this.state.file
       }
-      if (this.isValid() == false) {
+      if (this.isValid() === false) {
         valid = "Input sequence dna tidak valid!"
       }
 
