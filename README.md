@@ -4,10 +4,10 @@
 Sebuah aplikasi yang berbasis Web yang dapat mendeteksi seseorang terkena penyakit apa dengan menggunakan algoritma Pattern Matching. Adapun algoritma yang digunakan ada dua, yaitu Boyer-Moore dan Knuth-Morris-Pratt.
 
 ## Requirement program
-Frontend : React
-Backend : Node js Express
-Database : MySQL
-Berikut beberapa modul yang harus ada di setiap bagian.
+Frontend : React  
+Backend : Node js Express  
+Database : MySQL  
+Berikut beberapa modul yang harus ada di setiap bagian.  
 FrontEnd:
 - axios 0.27.2
 - moment 2.29.3
@@ -68,6 +68,7 @@ Menggunakan Fitur Tes DNA:
 Menggunakan Fitur Riwayat:
 - Pilih menu riwayat
 - Pengguna dapat memasukkan input berupa tanggal, nama orang, dan nama penyakit pada kolom input.
+- Format penulisan nama bulan pada tanggal pengecekan adalah dengan menggunakan bahasas inggris.
 - Hasil pencarian akan muncul di bawah kolom input.
 
 
@@ -76,4 +77,4 @@ Menggunakan Fitur Riwayat:
 | -------- | --------------------------- |
 | 13520021 | Gede Sumerta Yoga           |
 | 13520106 | Roby Purnomo                | 
-| 23520033 | Tri Sulton Adila            |
+| 13520033 | Tri Sulton Adila            |
