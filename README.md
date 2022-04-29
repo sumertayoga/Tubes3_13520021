@@ -66,10 +66,14 @@ Menggunakan Fitur Tes DNA:
 - Jika hasil pengecekan Not Found berarti masukan nama penyakit tidak ada di database
 
 Menggunakan Fitur Riwayat:
+- Pilih menu riwayat
+- Pengguna dapat memasukkan input berupa tanggal, nama orang, dan nama penyakit pada kolom input.
+- Hasil pencarian akan muncul di bawah kolom input.
+
 
 ## Author
 | NIM      | Nama                        |
 | -------- | --------------------------- |
 | 13520021 | Gede Sumerta Yoga           |
-| 13520106 | Roby Purnomo            | 
-|  | Tri Sulton Adila                |
+| 13520106 | Roby Purnomo                | 
+| 23520033 | Tri Sulton Adila            |
