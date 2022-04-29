@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import Add from './feature/Add'
+import Add from './feature/tambahDataPenyakit/Add'
 import axios from 'axios';
 import moment from 'moment';
 import { FindPenyakitPage } from './FindPenyakitPage';
@@ -44,35 +44,43 @@ function App() {
 
   return (
     <div className="App">
+      <div>
+        <h1> Tugas Besar III IF2211 Strategi Algoritma </h1>
+        <h2> Kelompok Nyari Penyakit </h2>
+      </div>
       <Router>
         <Nav/>
         <Switch>
           <Route path='/add'  component={Add} />
           <Route path='/tesdna'  component={FindPenyakitPage} />
+          <Route path='/riwayat'  component={
+            <div>
+              <h1>Pencarian Riwayat</h1>
+              <input className='search' type="text" placeholder='Search...'
+                  onKeyUp={(e) => searchItems(e.target.value)}
+                  />
+              {searchInput.length > 2 ? (
+                filteredResults.map((item) => {
+                  return (
+                    <div className='riwayat'>
+                      <div className='box' key={item.id}>
+                        {/* no tanggal nama penyakit hasil */}
+                        <p className='item_id'>{item.id_riwayat}</p>
+                        <p className='item_tanggal'>{item.tanggal}</p>
+                        <p className='item_pengguna'>{item.pengguna}</p>
+                        <p className='item_penyakit'>{item.nama}</p>
+                        <p className='item_hasil'>{item.hasil}</p>
+                      </div>
+                    </div>
+                  )
+                })
+              ) : (
+                  <p>Hasil pencarian akan terlihat di sini</p>
+                )}
+            </div>
+            } />
         </Switch>
       </Router>
-      <h1>Pencarian Riwayat</h1>
-      <input className='search' type="text" placeholder='Search...'
-          onKeyUp={(e) => searchItems(e.target.value)}
-          />
-      {searchInput.length > 2 ? (
-        filteredResults.map((item) => {
-          return (
-            <div className='riwayat'>
-              <div className='box' key={item.id}>
-                {/* no tanggal nama penyakit hasil */}
-                <p className='item_id'>{item.id_riwayat}</p>
-                <p className='item_tanggal'>{item.tanggal}</p>
-                <p className='item_pengguna'>{item.pengguna}</p>
-                <p className='item_penyakit'>{item.nama}</p>
-                <p className='item_hasil'>{item.hasil}</p>
-              </div>
-            </div>
-          )
-        })
-      ) : (
-          <p>Hasil pencarian akan terlihat di sini</p>
-        )}
       
     </div>
   );
