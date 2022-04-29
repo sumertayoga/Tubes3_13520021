@@ -34,7 +34,8 @@ $ npm install
 ```
 
 ## Cara Menggunakan Program
-Yang pertama harus dilakukan adalah merestore dump database yang ada di folder test ke mysql masing-masing. Kemudian menjalankan bagian frontend dengan menggunakan command npm start di direktori client dan menjalankan server atau backend dengan menggunakan command nodemon index / node index / npm start di direktori server.
+Yang pertama harus dilakukan adalah merestore dump database yang ada di folder test ke mysql masing-masing. Kemudian menjalankan bagian frontend dengan menggunakan command npm start di direktori client dan menjalankan server atau backend dengan menggunakan command nodemon index / node index / npm start di direktori server.  
+Buka file `db.js` yang terdapat pada `src/server/config/` lalu ganti password dengan password local database.
 
 ```
 $ cd src/client
