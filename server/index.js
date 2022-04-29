@@ -165,45 +165,52 @@ app.post('/upload', (req, res) => {
         
         fileName = req.file.filename;
         namaPengguna = req.body.pengguna;
-        console.log(namaPengguna);
         namaPenyakit = req.body.penyakit;
         content = fs.readFileSync("./public/" + fileName).toString();
 
-
-        
-        db.query("SELECT * FROM dna_disease WHERE nama = '" + namaPenyakit +"'" , (err, rows, fields) =>{
-            if (rows[0] == undefined){
-                isTrue = "Not Found"
-            }
-            else{
-                if(kmpMatching(content, rows[0].sequence_dna) != -1){
-                    isTrue = "TRUE";
-                }
-                else{
-                    isTrue = "FALSE";
-                }
-            }
+        let regexCheck = content.match(/[ACTG]+/g)
+        if(regexCheck.length>1){
             let result = {
                 nama: namaPengguna,
                 penyakit: namaPenyakit,
-                isTrue: isTrue
+                isTrue: "Data tidak sesuai"
             }
-            let intHasil
-            if(isTrue == "TRUE"){
-                intHasil = 1
-            }
-            else{
-                intHasil = 0
-            }
-            const d = new Date()
-            let date = d.getFullYear().toString() + "-" + d.getMonth().toString() + "-" + d.getDate().toString();
-            db.query("Insert into riwayat (id_penyakit, sequence_dna, tanggal, pengguna, hasil) values (" + rows[0].id + "," + "'" + rows[0].sequence_dna+ "'" +"," + "'" + date+ "'" + "," + "'" + namaPengguna+ "'"+","+ intHasil.toString() +")", (err, rows, fields) => {
+            return res.status(200).send(result)
+        }
+        else{
+            db.query("SELECT * FROM dna_disease WHERE nama = '" + namaPenyakit +"'" , (err, rows, fields) =>{
+                if (rows[0] == undefined){
+                    isTrue = "Not Found"
+                }
+                else{
+                    if(kmpMatching(content, rows[0].sequence_dna) != -1){
+                        isTrue = "TRUE";
+                    }
+                    else{
+                        isTrue = "FALSE";
+                    }
+                }
+                let result = {
+                    nama: namaPengguna,
+                    penyakit: namaPenyakit,
+                    isTrue: isTrue
+                }
+                let intHasil
+                if(isTrue == "TRUE"){
+                    intHasil = 1
+                }
+                else{
+                    intHasil = 0
+                }
+                const d = new Date()
+                let date = d.getFullYear().toString() + "-" + (d.getMonth()+1).toString() + "-" + d.getDate().toString();
+                db.query("Insert into riwayat (id_penyakit, sequence_dna, tanggal, pengguna, hasil) values (" + rows[0].id + "," + "'" + rows[0].sequence_dna+ "'" +"," + "'" + date+ "'" + "," + "'" + namaPengguna+ "'"+","+ intHasil.toString() +")", (err, rows, fields) => {
 
+                })
+
+                return res.status(200).send(result);
             })
-
-            return res.status(200).send(result);
-        })
-
+        }
 
     })
 });
