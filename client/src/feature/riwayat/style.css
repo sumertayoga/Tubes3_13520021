@@ -1,0 +1,46 @@
+.riwayat {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.box {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: left;
+  align-content: left;
+  align-items: left;
+  text-align: left;
+  border: black ridge 1px;
+  border-radius: 10px;
+  margin: 3px;
+  width: 40rem;
+  padding-left: 10px;
+}
+
+.item {
+  border: 1px solid #ffebee;
+}
+
+.item_id {
+  
+  margin-right: 20px;
+}
+
+.item_tanggal {
+  
+  margin-right: 20px;
+}
+
+.item_pengguna {
+  margin-right: 20px;
+}
+
+.item_penyakit {
+  margin-right: 20px;
+}
+
+.search {
+  margin-bottom: 20px;
+}

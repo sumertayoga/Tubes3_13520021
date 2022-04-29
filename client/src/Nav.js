@@ -11,7 +11,7 @@ function Nav(){
             <Link to="/tesdna">
                 <h3>tesdna</h3>
             </Link>
-            <Link to="/riwayat">
+            <Link to="/cari-riwayat">
                 <h3>riwayat</h3>
             </Link>
 
