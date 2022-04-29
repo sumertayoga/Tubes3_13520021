@@ -68,6 +68,7 @@ Menggunakan Fitur Tes DNA:
 Menggunakan Fitur Riwayat:
 - Pilih menu riwayat
 - Pengguna dapat memasukkan input berupa tanggal, nama orang, dan nama penyakit pada kolom input.
+- Format penulisan nama bulan pada tanggal pengecekan adalah dengan menggunakan bahasas inggris.
 - Hasil pencarian akan muncul di bawah kolom input.
 
 
@@ -76,4 +77,4 @@ Menggunakan Fitur Riwayat:
 | -------- | --------------------------- |
 | 13520021 | Gede Sumerta Yoga           |
 | 13520106 | Roby Purnomo                | 
-| 23520033 | Tri Sulton Adila            |
+| 13520033 | Tri Sulton Adila            |
