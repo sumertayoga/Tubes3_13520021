@@ -38,6 +38,11 @@ export const FileUploader = () => {
             })
             .catch( () => {
                 console.error('Error');
+                setHasil({
+                    nama: pengguna,
+                    isTrue: "Not found",
+                    penyakit: penyakit
+                });
             })
     };
 

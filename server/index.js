@@ -175,13 +175,19 @@ app.post('/upload', (req, res) => {
 
         
         db.query("SELECT * FROM dna_disease WHERE nama = '" + namaPenyakit +"'" , (err, rows, fields) =>{
-            if (err) throw err
-          console.log(rows[0]);
-            if(kmpMatching(content, rows[0].sequence_dna) != -1){
-                isTrue = "TRUE";
+            if (rows[0] == undefined){
+                isTrue = "Not Found"
+                console.log("1 jalan");
             }
             else{
-                isTrue = "FALSE";
+                console.log("2 jalan");
+                console.log(rows[0]);
+                if(kmpMatching(content, rows[0].sequence_dna) != -1){
+                    isTrue = "TRUE";
+                }
+                else{
+                    isTrue = "FALSE";
+                }
             }
             let result = {
                 nama: namaPengguna,
