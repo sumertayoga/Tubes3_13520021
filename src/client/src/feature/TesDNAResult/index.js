@@ -1,5 +1,4 @@
 import React from "react"
-import axios from "axios";
 
 export const FindPenyakit = ({hasil}) => {
 
@@ -10,7 +9,7 @@ export const FindPenyakit = ({hasil}) => {
     // })
 
     if(hasil != null){
-        if(hasil.isTrue == "Data tidak sesuai"){
+        if(hasil.isTrue === "Data tidak sesuai"){
             return (
                 <p>{hasil.isTrue}</p>
             )
