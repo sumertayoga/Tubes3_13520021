@@ -23,10 +23,38 @@ Backend:
 
 Modul-modul tersebut dapat diinstal dengan menggunakan command npm install di direktori src/client dan src/server
 
-## Cara Menggunakan Program
-Yang pertama harus dilakukan adalah merestore dump database yang ada di folder test ke mysql masing-masing. Kemudian menjalankan bagian frontend dengan menggunakan command npm start di direktori client dan menjalankan server atau backend dengan menggunakan command nodemon index atau node index di direktori server.
+```
+$ cd src/client
+$ npm install
+```
+dan
+```
+$ cd src/server
+$ npm install
+```
 
+## Cara Menggunakan Program
+Yang pertama harus dilakukan adalah merestore dump database yang ada di folder test ke mysql masing-masing. Kemudian menjalankan bagian frontend dengan menggunakan command npm start di direktori client dan menjalankan server atau backend dengan menggunakan command nodemon index / node index / npm start di direktori server.
+
+```
+$ cd src/client
+$ npm start
+```
+dan
+```
+$ cd src/server
+$ npm start
+```
+
+## Penggunaan Fitur
 Menggunakan Fitur Tambah Penyakit:
+- Klik add pada menu program
+- Masukkan nama penyakit yang ingin ditambahkan
+- Masukkan file txt yang berisi sequence DNA penyakit
+- Klik tombol submit
+- Jika terdapat pesan "Berhasil menambahkan ke dalam database" maka masukan telah berhasil dimasukkan ke dalam database
+- Jika terdapat pesan "Error : {detail}" maka terdapat kesalahan dalam melakukan insert into database
+- Jika terdapat pesan "Error : Input sequence dna tidak valid!" maka masukan file tidak valid
 
 Menggunakan Fitur Tes DNA:
 - Klik tesdna yang ada di bagian atas program
@@ -43,5 +71,5 @@ Menggunakan Fitur Riwayat:
 | NIM      | Nama                        |
 | -------- | --------------------------- |
 | 13520021 | Gede Sumerta Yoga           |
-|  | Roby Purnomo            | 
+| 13520106 | Roby Purnomo            | 
 |  | Tri Sulton Adila                |

@@ -43,7 +43,7 @@ class Add extends Component {
       axios.post('//localhost:3001/tambahpenyakit', 
       {disease, dna}
       ).then((res) => {
-        alert("Result : " + res.data)
+        alert("Berhasil menambahkan ke dalam database")
         console.log(res.data);
       }).catch((err) => {
         alert("Error : " + err)
