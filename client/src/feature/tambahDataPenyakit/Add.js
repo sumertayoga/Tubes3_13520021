@@ -17,13 +17,41 @@ class Add extends Component {
       disease: event.target.value
     })
   }
+
+  isValid = () => {
+    let dna = this.state.file
+    let result = true;
+    for (let index = 0; index < dna.length; index++) {
+      if (!(dna[index] == 'A' || dna[index] == 'G' || dna[index] == 'C' || dna[index] == 'T')) {
+        result = false;
+      }
+    }
+    return result;
+  }
   
   handleSubmit = event => {
     // Details of the uploaded file
-    console.log(this.state.selectedFile);
-    console.log(this.state.file)
+    
+    if (this.isValid() == false) {
+      alert("Error : Input sequence dna tidak valid!")
+    } else {
+      let disease = this.state.disease;
+      let dna = this.state.file;
+      
+      console.log(disease);
+      console.log(dna);
+      axios.post('//localhost:3001/tambahpenyakit', 
+      {disease, dna}
+      ).then((res) => {
+        alert("Result : " + res.data)
+        console.log(res.data);
+      }).catch((err) => {
+        alert("Error : " + err)
+      })
 
-    alert(`${this.state.disease}`)
+    }
+
+
     event.preventDefault()
   }
 
@@ -34,15 +62,7 @@ class Add extends Component {
     this.setState({ selectedFile: event.target.files[0] });
   
   }
-
-  // On file upload (click the upload button)
-  // onFileUpload = () => {
-    
-    
-  // };
-
-  // File content to be displayed after
-  // file upload is complete
+  
   fileData = () => {
   
     if (this.state.selectedFile) {
@@ -57,17 +77,22 @@ class Add extends Component {
         console.log('file error', reader.error)
       }
       let text = ""
+      let valid = ""
       if (this.state.selectedFile.type == "text/plain") {
         text = this.state.file
       }
+      if (this.isValid() == false) {
+        valid = "Input sequence dna tidak valid!"
+      }
 
       return (
-        <div>
+        <div class='upload'>
           <h2>File Details:</h2>            
           <p>Nama File: {this.state.selectedFile.name}</p>
           <p>Tipe File: {this.state.selectedFile.type}</p>
           <p>Isi File : </p>
           <p>{text}</p>
+          <h2>{valid}</h2>
         </div>
       );
     } else {
@@ -86,7 +111,7 @@ class Add extends Component {
         <h1>
           Tambah Data Penyakit
         </h1>
-        <div className=''>
+        <div>
           <label>Nama Penyakit: </label>
           <input 
             type='text' 
@@ -98,6 +123,7 @@ class Add extends Component {
           <label>Pilih File: </label>
           <input
             type='file'
+            accept=".txt"
             onChange={this.onFileChange}
           />
           {this.fileData()}
@@ -108,4 +134,4 @@ class Add extends Component {
   }
 }
 
-export default Add
+export default Add;

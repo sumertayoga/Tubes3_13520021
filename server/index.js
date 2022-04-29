@@ -23,6 +23,23 @@ app.get("/riwayat", (req, res) => {
     });
   });
 
+app.post("/tambahpenyakit", (req,res) => {
+    const disease = req.body.disease;
+    const dna = req.body.dna;
+
+    db.query(
+        "INSERT INTO dna_disease (nama, sequence_dna) VALUES (?, ?)", 
+        [disease, dna],
+        (err, result) => {
+            if (err) {
+                res.send(err)
+            } else {
+                res.send(result)
+            }
+        }
+    )
+});
+
 app.listen(PORT, ()=>{
     console.log(`Server is running on ${PORT}`)
 })
