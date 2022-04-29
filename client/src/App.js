@@ -13,7 +13,7 @@ function App() {
         <h1> Tugas Besar III IF2211 Strategi Algoritma </h1>
         <h2> Kelompok Nyari Penyakit </h2>
       </div>
-      <Router>
+      <Router forceRefresh={true}>
         <Nav/>
         <Switch>
           <Route path='/add'  component={Add} />
